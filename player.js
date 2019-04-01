@@ -1,27 +1,31 @@
 const player = {
     hitPoints: 100,
-    maxAttack: 5,
+    baseAttackDamage: 5,
+    damageTaken: 0,
     armor: 1,
     level: 1,
+    isAlive: true,
 
-    attack: function(enemy) {
-        this.hitPoints -= this.calculateAttackDamage(enemy.maxAttack);
-        enemy.hitPoints -= this.calculateAttackDamage(this.maxAttack);
+    fight: function(enemy) {
+        const rawDamageTaken = enemy.calculateAttackDamage();
+        this.damageTaken = Math.max(rawDamageTaken - this.level, 1);
+        this.hitPoints -= this.damageTaken;
+        if (this.hitPoints <= 0) {
+            this.isAlive = false;
+        }
+
+        const rawAttackDamage = this.calculateAttackDamage();
+
+        enemy.takeDamage(rawAttackDamage);
     },
 
-    calculateAttackDamage: function(maxAttack) {
-        const randomAttack = randomizeAttack(maxAttack);
-        const damageTaken = randomAttack - this.armor;
-        return Math.max(damageTaken, 1);
-    },
-
-    randomizeAttack: function(attackMax) {
-        return Math.floor(Math.random() * attackMax);
+    calculateAttackDamage: function() {
+        return Math.floor(Math.random() * this.baseAttackDamage);
     },
 
     levelUp: function() {
-        this.attackDamage = Math.floor(this.attackDamage * 1.2);
-        this.level = this.level + 1;
-        this.armor = this.armor + 1;
+        this.baseAttackDamage = Math.floor(this.baseAttackDamage * 1.2);
+        this.level++;
+        this.hitPoints += 5;
     },
 };

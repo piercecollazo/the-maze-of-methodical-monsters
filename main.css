@@ -1,0 +1,11 @@
+#player-health {
+    width: 200px;
+    height: 20px;
+    background-color: green;
+}
+
+#monster-health {
+    width: 60px;
+    height: 20px;
+    background-color: red;
+}
