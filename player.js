@@ -2,7 +2,6 @@ const player = {
     hitPoints: 100,
     baseAttackDamage: 5,
     damageTaken: 0,
-    armor: 1,
     level: 1,
     isAlive: true,
 

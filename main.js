@@ -1,6 +1,5 @@
 window.onload = init;
 
-
 function init() {
     document.querySelector('#fight').addEventListener(`click`, attackRound);
 }
@@ -20,7 +19,6 @@ function attackRound(event) {
     } else {
         gameOver();
     }
-    
     
     updateHtml();
 }
@@ -47,9 +45,10 @@ function updateDamage() {
 
 function updateHealthBars() {
     const playerHealth = document.querySelector('#player-health');
-    const monsterHealth = document.querySelector('#monster-health');
     playerHealth.innerText = `${player.hitPoints}`
     playerHealth.style.width = `${player.hitPoints * 2}px`;
+    
+    const monsterHealth = document.querySelector('#monster-health');
     monsterHealth.innerText = `${monster.hitPoints}`
     monsterHealth.style.width = `${monster.hitPoints * 2}px`;
 }
