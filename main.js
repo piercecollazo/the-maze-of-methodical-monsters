@@ -15,10 +15,10 @@ function attackRound(event) {
         updateLevel();
     }
     
-    if (!player.isAlive) {
-        gameOver();
-    } else {
+    if (player.isAlive) {
         player.fight(monster)
+    } else {
+        gameOver();
     }
     
     
@@ -32,15 +32,14 @@ function updateHtml() {
 }
 
 function updateDamage() {
-    monsterDamageText = monster.damageTaken > player.damageTaken
-        ? `You clobbered the monster with `
-        : `You barely scratched the monster with `;
-    monsterDamageText += monster.damageTaken;
+    const monsterDamageText = monster.damageTaken > 1
+        ? `You clobbered the monster with ${monster.damageTaken}.`
+        : `You barely scratched the monster with ${monster.damageTaken}.`;
+
+    const playerDamageText = player.damageTaken > 1
+        ? `The monster clobbered you with ${player.damageTaken}.`
+        : `The monster barely scratched you with ${player.damageTaken}.`;
     
-    playerDamageText = player.damageTaken > monster.damageTaken
-        ? `The monster clobbered you with `
-        : `The monster barely scratched you with `;
-    playerDamageText += player.damageTaken;
     document.querySelector('#player-damage-taken').innerText = playerDamageText;
     document.querySelector('#monster-damage-taken').innerText = monsterDamageText;
 }
@@ -60,7 +59,7 @@ function updateResult() {
     if (!player.isAlive) {
         result = 'You died. Game over.';
     } else if (!monster.isAlive) {
-        result = `You slayed the monster! Here comes another...`; 
+        result = `You slayed the monster, leveled up, and got a slight heal. But here comes another...`; 
     }
     
     document.querySelector('#results').innerText = result;
