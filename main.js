@@ -7,17 +7,14 @@ function init() {
 function attackRound(event) {
     event.preventDefault();
     
-    
-    if (!monster.isAlive) {
+    if (monster.isAlive === false) {
         monster.respawn();
         player.levelUp();
         updateLevel();
     }
     
-    if (player.isAlive) {
+    if (player.isAlive === true) {
         player.fight(monster)
-    } else {
-        gameOver();
     }
     
     updateHtml();
@@ -27,21 +24,29 @@ function updateHtml() {
     updateDamage();
     updateHealthBars();
     updateResult();
-}
+}   
 
 function updateDamage() {
-    const monsterDamageText = monster.damageTaken > 1
-        ? `You clobbered the monster with ${monster.damageTaken}.`
-        : `You barely scratched the monster with ${monster.damageTaken}.`;
+    let monsterDamageAction = getAction(monster.lastDamageTaken)
+    let playerDamageAction = getAction(player.lastDamageTaken);
 
-    const playerDamageText = player.damageTaken > 1
-        ? `The monster clobbered you with ${player.damageTaken}.`
-        : `The monster barely scratched you with ${player.damageTaken}.`;
+    const monsterDamageText = `You ${monsterDamageAction} the monster for ${monster.lastDamageTaken} damage.`
+
+    const playerDamageText = `The monster ${playerDamageAction} you for ${player.lastDamageTaken} damage.`;
     
     document.querySelector('#player-damage-taken').innerText = playerDamageText;
     document.querySelector('#monster-damage-taken').innerText = monsterDamageText;
 }
 
+function getAction(damage) {
+    if (damage < 1) {
+        return 'barely scratched';
+    } else if (damage < 4) {
+       return 'hit';
+    } else {
+       return 'clobbered';
+    }
+}
 
 function updateHealthBars() {
     const playerHealth = document.querySelector('#player-health');
@@ -55,9 +60,9 @@ function updateHealthBars() {
 
 function updateResult() {
     let result = '';
-    if (!player.isAlive) {
+    if (player.isAlive === false) {
         result = 'You died. Game over.';
-    } else if (!monster.isAlive) {
+    } else if (monster.isAlive === false) {
         result = `You slayed the monster, leveled up, and got a slight heal. But here comes another...`; 
     }
     
@@ -66,8 +71,4 @@ function updateResult() {
 
 function updateLevel() {
     document.querySelector('#level-number').innerText = player.level;
-}
-
-function gameOver() {
-    document.querySelector('#results').innerText = `You lost. Game over.`;    
 }

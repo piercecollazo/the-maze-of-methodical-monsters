@@ -9,3 +9,7 @@
     height: 20px;
     background-color: red;
 }
+
+.health-bar {
+    transition: width 1s;
+}
