@@ -38,11 +38,19 @@ Well, if you run this app, you'll get a ton of `undefined`s printed to the scree
 
 ### A Note On Trailing Commas
 
-It used to be that we'd leave off commas between our object properties when adding new properties or (especially) moving them around. At this point, every browser and JavaScript environment should support trailing commas. So after you add any property or method, put a comma afterwards, even if it's the last property. You'll save yourself some errors later!
+It used to be that we'd leave off commas after our object properties or array elements when adding new ones to the end. . At this point, every browser and JavaScript environment should support "trailing commas", i.e., a comma at the end of our last item. So after you add any property or method or element, put a comma afterwards, even if it's the last property. You'll save yourself errors and aggravation later!
 
 
 ### Next Step: "player.fight is not a function"
 
-Well, that's awkward!
+That's what you should see when you look at your console now. Whoops! But also: thanks, console! Now we know our next step!
 
-Let's 
+Let's add a `fight` method to `player`, remembering that a method is just an object property whose value is a function instead of a string or array or object or number or boolean or what have you. Look up the syntax if you need a refresher! Like most things, it's not a ton of code once you have the syntax down, and you should never feel ashamed to have to look it up again.
+
+So what does `fight` do?
+
+The first thing it does is lower the `hitPoints` property. Let's start out with something relatively simple, where we're lowering the hit points by a random number 1-5.
+
+Don't forget to use your `this`! You'll always need `this` to change any of the _internal_ elements in your object; `hitPoints` by itself would be a variable in scope, and `player.hitPoints` can lead to all kinds of issues if you have multiple `player` objects (which you will definitely have later in your coding career!). But `this` in most contexts means "this particular object that the method is on", and that use case is extremely common, so you'll be using `this` a _lot_.
+
+So! Now `main.js` can use our changing `player.hitPoints` give the user a readout of how many hit points are left and even change the health bar's width. But before we even get to damaging the monster, let's fix those "0 damage" messages below the health bars.

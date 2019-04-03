@@ -11,5 +11,8 @@
 }
 
 .health-bar {
+    display: flex;
+    justify-content: flex-end;
     transition: width 1s;
+    color: white;
 }
