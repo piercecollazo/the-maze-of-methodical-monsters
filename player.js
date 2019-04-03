@@ -2,10 +2,11 @@ const player = {
     isAlive: true,
     hitPoints: 100,
     level: 1,
+    baseAttackDamage: 5,
     lastDamageTaken: 0,
     fight: function(monster){
-       this.lastDamageTaken = Math.ceil(Math.random() * 5);
-       monster.lastDamageTaken = Math.ceil(Math.random() * 5);
+       this.lastDamageTaken = Math.ceil(Math.random() * monster.baseAttackDamage);
+       monster.lastDamageTaken = Math.ceil(Math.random() * this.baseAttackDamage);
        this.hitPoints = this.hitPoints - this.lastDamageTaken;
        monster.hitPoints = monster.hitPoints - monster.lastDamageTaken;
 
@@ -17,5 +18,6 @@ const player = {
     },
     levelUp: function(){
         this.level += 1;
+        this.baseAttackDamage += 5;
     },
 }
