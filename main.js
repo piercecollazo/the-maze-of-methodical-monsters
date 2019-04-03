@@ -39,7 +39,7 @@ function updateDamage() {
 }
 
 function getAction(damage) {
-    if (damage < 1) {
+    if (damage < 2) {
         return 'barely scratched';
     } else if (damage < 4) {
        return 'hit';
