@@ -20,4 +20,11 @@ const player = {
         this.level += 1;
         this.baseAttackDamage += 5;
     },
+    reset: function(){
+        this.isAlive = true;
+        this.hitPoints = 100;
+        this.level = 1;
+        this.baseAttackDamage = 5;
+        this.lastDamageTaken = 0;
+    },
 }

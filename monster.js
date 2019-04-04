@@ -10,6 +10,13 @@ const monster = {
         this.hitPoints = this.baseHP;
         this.baseAttackDamage += 2;
         player.hitPoints += Math.ceil(Math.random() * 50);
-    }
+    },
+    reset: function(){
+        this.isAlive = true;
+        this.hitPoints = 30;
+        this.baseHP = 30;
+        this.baseAttackDamage = 5;
+        this.lastDamageTaken = 0;
+    },
 };
 

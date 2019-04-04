@@ -2,6 +2,7 @@ window.onload = init;
 
 function init() {
     document.querySelector('#fight').addEventListener(`click`, attackRound);
+    document.querySelector('#new-game').addEventListener('click', newGame);
 }
 
 function attackRound(event) {
@@ -18,6 +19,15 @@ function attackRound(event) {
     }
     
     updateHtml();
+}
+
+function newGame(){
+    monster.reset();
+    player.reset();
+    updateHtml();
+    document.querySelector('#player-damage-taken').innerText = '\xa0 ';
+    document.querySelector('#monster-damage-taken').innerText = '\xa0 ';
+    document.querySelector('#results').innerText = 'Let the battle begin!'
 }
 
 function updateHtml() {
