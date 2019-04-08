@@ -13,7 +13,7 @@ const player = {
        if(monster.hitPoints < 1){
            monster.isAlive = false;
        } else if(this.hitPoints <= 0){
-           player.isAlive = false;
+           this.isAlive = false;
        }
     },
     levelUp: function(){

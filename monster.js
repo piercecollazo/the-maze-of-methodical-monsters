@@ -17,6 +17,8 @@ const monster = {
         this.baseHP = 30;
         this.baseAttackDamage = 5;
         this.lastDamageTaken = 0;
+        this.defeated = 0;
     },
+    defeated: 0,
 };
 

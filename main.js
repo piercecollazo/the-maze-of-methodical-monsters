@@ -7,14 +7,17 @@ function init() {
 
 function attackRound(event) {
     event.preventDefault();
-    
-    if (monster.isAlive === false) {
+    if(monster.defeated % 10 === 0 && boss.isAlive === true){
+        player.fight(boss);
+        player.levelUp();
+        updateLevel();
+        player.hitPoints += Math.ceil(Math.random() * 50) + 30;
+    }else if (monster.isAlive === false) {
         monster.respawn();
         player.levelUp();
         updateLevel();
-    }
-    
-    if (player.isAlive === true) {
+        monster.defeated += 1;
+    }else if (player.isAlive === true) {
         player.fight(monster)
     }
     
@@ -25,6 +28,7 @@ function newGame(){
     monster.reset();
     player.reset();
     updateHtml();
+    updateLevel();
     document.querySelector('#player-damage-taken').innerText = '\xa0 ';
     document.querySelector('#monster-damage-taken').innerText = '\xa0 ';
     document.querySelector('#results').innerText = 'Let the battle begin!'
